@@ -16,7 +16,7 @@ set -e
 echo "Installing utilities."
 apk update
 apk add git
-npm install -g grunt-cli
+npm install -g grunt-cli gulp-cli
 
 echo "Installing NPM dependencies."
 cd $WD_PATH
