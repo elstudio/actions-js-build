@@ -12,9 +12,19 @@ set -e
 #   chmod 0600 "$NPM_CONFIG_USERCONFIG"
 # fi
 
+
+echo "Installing utilities."
+apk update
+apk add git
 npm install -g grunt-cli
+
+echo "Installing NPM dependencies."
 cd $WD_PATH
 npm install
+
+echo "Compiling."
 grunt
+
+echo "Changed files."
 git status
 # sh -c "npm $*"
