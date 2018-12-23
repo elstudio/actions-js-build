@@ -12,6 +12,7 @@ set -e
 #   chmod 0600 "$NPM_CONFIG_USERCONFIG"
 # fi
 
+npm install -g grunt-cli
 cd $WD_PATH
 npm install
 grunt
