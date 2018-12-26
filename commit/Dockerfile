@@ -1,4 +1,4 @@
-FROM alpine/git:lastest
+FROM alpine/git:latest
 
 LABEL version="1.0.0"
 LABEL repository="https://github.com/elstudio/actions-js-build"
