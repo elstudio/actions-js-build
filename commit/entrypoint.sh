@@ -11,6 +11,8 @@ fi
 # This section only runs if there have been file changes
 if ! git diff --quiet
 then 
+  git config --global user.email "servers@el-studio.com"
+  git config --global user.name "$GITHUB_ACTOR"
   git add .
   git commit -m "Regenerate build artifacts."
   git push
