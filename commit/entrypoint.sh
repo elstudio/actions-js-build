@@ -8,6 +8,9 @@ then
   cd $WD_PATH
 fi
 
+# Show the event json
+cat $GITHUB_EVENT_PATH
+
 # This section only runs if there have been file changes
 if ! git diff --quiet
 then 
@@ -15,7 +18,8 @@ then
   git config --global user.name "$GITHUB_ACTOR"
   git add .
   git commit -m "Regenerate build artifacts."
-  git push
+  GITHUB_BRANCH=`echo $GITHUB_REF | awk '{ split($0,arr,"/"); print arr[3] }'`
+  git push --set-upstream origin $GITHUB_BRANCH
 else 
   echo "Working tree clean. Nothing to commit."
 fi
