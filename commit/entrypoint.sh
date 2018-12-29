@@ -9,7 +9,7 @@ then
 fi
 
 # Set up .netrc file
-setup_netrc ( ) {
+git_setup ( ) {
   cat << EOF > $HOME/.netrc
 machine github.com
 login $GITHUB_ACTOR
@@ -21,20 +21,22 @@ password $GITHUB_TOKEN
 
 EOF
   chmod 600 $HOME/.netrc
-  echo "HOME directory contents"
-  ls -al $HOME
+  # echo "HOME directory contents"
+  # ls -al $HOME
+
+  # Can we proceed without global setup here?
+  #git config --global user.email "servers@el-studio.com"
+  #git config --global user.name "$GITHUB_ACTOR"
 }
 
 # Show the event json
-cat $GITHUB_EVENT_PATH
+#cat $GITHUB_EVENT_PATH
 
 
 # This section only runs if there have been file changes
 if ! git diff --quiet
 then 
-  setup_netrc
-  git config --global user.email "servers@el-studio.com"
-  git config --global user.name "$GITHUB_ACTOR"
+  git_setup
   git add .
   git commit -m "Regenerate build artifacts."
   GITHUB_BRANCH=grunt-actions
