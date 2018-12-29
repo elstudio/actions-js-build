@@ -35,7 +35,7 @@ then
   git_setup
   git add .
   git commit -m "Regenerate build artifacts."
-  GITHUB_BRANCH=`awk -v FS=/ -e '{ print $3 }' < echo $GITHUB_REF`
+  GITHUB_BRANCH=`awk -v FS=/ -e '{ print $3 }' <<< "$GITHUB_REF"`
   git push --set-upstream origin $GITHUB_BRANCH
 else 
   echo "Working tree clean. Nothing to commit."
