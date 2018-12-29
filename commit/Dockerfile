@@ -5,10 +5,10 @@ LABEL repository="https://github.com/elstudio/actions-js-build"
 LABEL homepage="https://github.com/elstudio/actions-js-build"
 LABEL maintainer="el-studio Actions <servers+actions@el-studio.com>"
 
-LABEL com.github.actions.name="GitHub Action for git operations"
-LABEL com.github.actions.description="Wraps the git CLI to enable common git commit commands."
-LABEL com.github.actions.icon="package"
-LABEL com.github.actions.color="red"
+LABEL com.github.actions.name="GitHub Action for git commit"
+LABEL com.github.actions.description="Commits any changed files and pushes the result back to origin."
+LABEL com.github.actions.icon="git-commit"
+LABEL com.github.actions.color="green"
 COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
 
 RUN apk --update --no-cache add git openssh-client
