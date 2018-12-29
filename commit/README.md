@@ -1,66 +1,34 @@
-# GitHub Action for Git
+# GitHub Actions for Git commit
 
-This Action for [npm](https://www.npmjs.com/) enables arbitrary actions with the `npm` command-line client, including testing packages and publishing to a registry.
+This Action for git commits any changed files and pushes those changes back to the origin repository.
 
 ## Usage
 
-An example workflow to build, test, and publish an npm package to the default public registry follows:
+An example workflow to commit and push any changes back to the GitHub origin repository:
 
 ```hcl
-workflow "Build, Test, and Publish" {
+workflow "Commit and Push" {
   on = "push"
-  resolves = ["Publish"]
+  resolves = ["Commit and Push"]
 }
 
-action "Build" {
-  uses = "actions/npm@master"
-  args = "install"
-}
-
-action "Test" {
-  needs = "Build"
-  uses = "actions/npm@master"
-  args = "test"
-}
-
-# Filter for a new tag
-action "Tag" {
-  needs = "Test"
-  uses = "actions/bin/filter@master"
-  args = "tag"
-}
-
-action "Publish" {
-  needs = "Tag"
-  uses = "actions/npm@master"
-  args = "publish --access public"
-  secrets = ["NPM_AUTH_TOKEN"]
+action "Commit and Push" {
+  uses = "elstudio/actions-js-build/commit@master"
+  secrets = ["GITHUB_TOKEN"]
+  env = {
+    WD_PATH = "./web/themes/nw8"
+  }
 }
 ```
 
 ### Secrets
 
-* `NPM_AUTH_TOKEN` - **Optional**. The token to use for authentication with the npm registry. Required for `npm publish` ([more info](https://docs.npmjs.com/getting-started/working_with_tokens))
+* `GITHUB_TOKEN` - **Required**. The token to use for authentication with GitHub to commit and push changes back to the origin repository. ([more info](https://developer.github.com/actions/creating-github-actions/accessing-the-runtime-environment/#environment-variables))
 
 ### Environment variables
 
-* `NPM_REGISTRY_URL` - **Optional**. To specify a registry to authenticate with. Defaults to `registry.npmjs.org`
-* `NPM_CONFIG_USERCONFIG` - **Optional**. To specify a non-default per-user configuration file. Defaults to `$HOME/.npmrc` ([more info](https://docs.npmjs.com/misc/config#npmrc-files))
+* `WD_PATH` - **Optional**. To specify a directory other than the repository root to check for changed files.
 
-#### Example
-
-To authenticate with, and publish to, a registry other than `registry.npmjs.org`:
-
-```hcl
-action "Publish" {
-  uses = "actions/npm@master"
-  args = "publish --access public"
-  env = {
-    NPM_REGISTRY_URL = "someOtherRegistry.someDomain.net"
-  }
-  secrets = ["NPM_AUTH_TOKEN"]
-}
-```
 
 ## License
 
