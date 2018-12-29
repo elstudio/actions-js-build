@@ -21,16 +21,12 @@ password $GITHUB_TOKEN
 
 EOF
   chmod 600 $HOME/.netrc
-  # echo "HOME directory contents"
-  # ls -al $HOME
 
   # Can we proceed without global setup here?
-  #git config --global user.email "servers@el-studio.com"
-  #git config --global user.name "$GITHUB_ACTOR"
+  # Maybe, so long as we specifiy the --author option on commit
+  git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+  git config user.name "$GITHUB_ACTOR"
 }
-
-# Show the event json
-#cat $GITHUB_EVENT_PATH
 
 
 # This section only runs if there have been file changes
