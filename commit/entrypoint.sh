@@ -10,15 +10,14 @@ fi
 
 # Set up .netrc file
 git_setup ( ) {
-  cat << EOF > $HOME/.netrc
-machine github.com
-login $GITHUB_ACTOR
-password $GITHUB_TOKEN
+  cat <<- EOF > $HOME/.netrc
+		machine github.com
+		login $GITHUB_ACTOR
+		password $GITHUB_TOKEN
 
-machine api.github.com
-login $GITHUB_ACTOR
-password $GITHUB_TOKEN
-
+		machine api.github.com
+		login $GITHUB_ACTOR
+		password $GITHUB_TOKEN
 EOF
   chmod 600 $HOME/.netrc
 
@@ -30,13 +29,13 @@ EOF
 
 
 # This section only runs if there have been file changes
+echo "Checking for uncommitted changes in the git working tree."
 if ! git diff --quiet
 then 
   git_setup
   git add .
   git commit -m "Regenerate build artifacts."
-  GITHUB_BRANCH=grunt-actions
-  #GITHUB_BRANCH=`echo $GITHUB_REF | awk -F / '{ print $3 }'`
+  GITHUB_BRANCH=`echo $GITHUB_REF | awk -F / '{ print $3 }'`
   git push --set-upstream origin $GITHUB_BRANCH
 else 
   echo "Working tree clean. Nothing to commit."

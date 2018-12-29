@@ -1,4 +1,4 @@
-FROM alpine/git:latest
+FROM alpine:latest
 
 LABEL version="1.0.0"
 LABEL repository="https://github.com/elstudio/actions-js-build"
@@ -10,6 +10,8 @@ LABEL com.github.actions.description="Wraps the git CLI to enable common git com
 LABEL com.github.actions.icon="package"
 LABEL com.github.actions.color="red"
 COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
+
+RUN apk --update --no-cache add git openssh-client
 
 COPY "entrypoint.sh" "/entrypoint.sh"
 ENTRYPOINT ["/entrypoint.sh"]
