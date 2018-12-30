@@ -11,8 +11,7 @@ LABEL com.github.actions.icon="git-commit"
 LABEL com.github.actions.color="green"
 COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
 
-RUN apk --update --no-cache add git openssh-client
+RUN apk --update --no-cache add git
 
 COPY "entrypoint.sh" "/entrypoint.sh"
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["help"]
