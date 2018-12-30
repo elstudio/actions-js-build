@@ -17,6 +17,7 @@ action "Build" {
   env = {
     WD_PATH = "./web/themes/nw8"
   }
+  args = "default"
 }
 
 action "Commit and Push" {
