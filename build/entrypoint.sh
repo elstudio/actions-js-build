@@ -15,13 +15,14 @@ npm install
 if [ -f "gulpfile.js" ]
 then 
   npm install -g gulp-cli
-  echo "Running Gulp default task"
+  echo "Running Gulp with args"
   sh -c "gulp $*"
 elif [ -f "Gruntfile.js" ]
 then 
   npm install -g grunt-cli
-  echo "Running Grunt default task"
+  echo "Running Grunt with args"
   sh -c "grunt $*"
 else
-  echo "Neither Gruntfile nor gulpfile found. Nothing to execute."
+  echo "Running NPM with args"
+  sh -c "npm $*"
 fi
