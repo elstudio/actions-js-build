@@ -2,11 +2,11 @@
 
 Run JS build tasks with Gulp, Grunt or NPM, then commit any changed files and push them back to your original repository.
 
-Perfect for Grunt tasks that do CSS (or SASS/LESS) compilation or JavaScript transpilation.  
+Perfect for Grunt or Gulp tasks that do CSS (or SASS/LESS) compilation or JS transpilation.  If your build task changes files, these actions are for you.
 
-This repository contains two actions that may be used independently -- or typically one after another:
+This repository contains two actions that may be used independently -- typically one after another:
 
-- **build** (elstudio/actions-js-build/build@master): Looks for a gulpfile.js or Gruntfile.js in the working directory, then installs any required npm packages and runs the build tool. If it finds neither gulp or grunt, the script runs npm. Set the workflow `args` arguments to run the tasks of your choice.
+- **build** (elstudio/actions-js-build/build@master): Looks for a gulpfile.js or Gruntfile.js in the working directory, then installs any required npm packages and runs the appropriate build tool. If it finds neither gulp or grunt, the script runs npm. Set the workflow `args` arguments to run the tasks of your choice.
 - **commit** (elstudio/actions-js-build/commit@master): Commits any file changes, and pushes them back to the current branch of the origin repository on GitHub.
 
 
