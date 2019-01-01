@@ -1,4 +1,4 @@
-# GitHub Actions for Git commit
+# GitHub Action for Git commit
 
 This Action for git commits any changed files and pushes those changes back to the origin repository.
 
@@ -17,6 +17,7 @@ action "Commit and Push" {
   secrets = ["GITHUB_TOKEN"]
   env = {
     WD_PATH = "./web/themes/nw8"
+    PUSH_BRANCH = "staging"
   }
 }
 ```
@@ -28,7 +29,7 @@ action "Commit and Push" {
 ### Environment variables
 
 * `WD_PATH` - **Optional**. To specify a directory other than the repository root to check for changed files.
-
+* `PUSH_BRANCH` - **Optional**. The branch that changes will be pushed to. Default is the currently checked out branch.
 
 ## License
 

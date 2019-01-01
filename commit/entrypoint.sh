@@ -1,14 +1,25 @@
 #!/bin/sh
+## This GitHub Action for git commits any changed files and pushes 
+## those changes back to the origin repository.
+##
+## Required environment variable:
+## - $GITHUB_TOKEN: The token to use for authentication with GitHub 
+## to commit and push changes back to the origin repository.
+##
+## Optional environment variables:
+## - $WD_PATH: Working directory to CD into before checking for changes
+## - $PUSH_BRANCH: Remote branch to push changes to
 
 set -e
 
+# If WD_PATH is defined, then cd to it
 if [ -n "$WD_PATH" ]
 then
   echo "Changing dir to $WD_PATH"
   cd $WD_PATH
 fi
 
-# Set up .netrc file
+# Set up .netrc file with GitHub credentials
 git_setup ( ) {
   cat <<- EOF > $HOME/.netrc
 		machine github.com
@@ -21,10 +32,12 @@ git_setup ( ) {
 EOF
   chmod 600 $HOME/.netrc
 
-  # Can we proceed without global setup here?
-  # Maybe, so long as we specifiy the --author option on commit
+  # Git requires our "name" and email address -- use GitHub handle
   git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
   git config user.name "$GITHUB_ACTOR"
+  
+  # Push to the current branch if PUSH_BRANCH hasn't been overriden
+  : ${PUSH_BRANCH:=`echo "$GITHUB_REF" | awk -F / '{ print $3 }' `}
 }
 
 
@@ -35,8 +48,7 @@ then
   git_setup
   git add .
   git commit -m "Regenerate build artifacts."
-  branch=`echo "$GITHUB_REF" | awk -F / '{ print $3 }' `
-  git push --set-upstream origin $branch
+  git push --set-upstream origin $PUSH_BRANCH
 else 
   echo "Working tree clean. Nothing to commit."
 fi
