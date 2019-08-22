@@ -21,7 +21,7 @@ else
 fi
 
 # If WD_PATH is defined, then cd to it
-if [ -v "$WD_PATH" ]
+if [ ! -z "$WD_PATH" ]
 then
   echo "Changing dir to $WD_PATH"
   cd $WD_PATH
