@@ -19,7 +19,8 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   entrypoint: 'entrypoint.sh'
-  # env:
-  #   wd_path: ${{ inputs.wdPath }}
-  #   push_branch: ${{ inputs.pushBranch }}
-  #   debug: ${{ inputs.debug }}
+  env:
+    debug: ${{ inputs.debug }}
+    wd_path: ${{ inputs.wdPath }}
+    # push_branch: ${{ inputs.pushBranch }}
+ 
