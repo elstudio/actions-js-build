@@ -10,7 +10,15 @@
 ## - $WD_PATH: Working directory to CD into before checking for changes
 ## - $PUSH_BRANCH: Remote branch to push changes to
 
-set -e
+if [ "$DEBUG" == "false" ]
+then
+  # Carry on, but do quit on errors
+  set -e
+else
+  # Verbose debugging
+  set -exuo pipefail
+  export LOG_LEVEL=debug
+fi
 
 # If WD_PATH is defined, then cd to it
 if [ -n "$WD_PATH" ]

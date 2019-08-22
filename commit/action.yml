@@ -11,6 +11,15 @@ inputs:
   pushBranch:
     description: 'Override branch to push to'
     requried: false
+  debug:
+    description: 'Print script debugging info'
+    required: false
+    default: 'false'
 runs:
-  using: 'sh'
-  main: 'entrypoint.sh'
+  using: 'docker'
+  image: 'Dockerfile'
+  entrypoint: 'entrypoint.sh'
+  env:
+    wd_path: ${{ inputs.wdPath }}
+    push_branch: ${{ inputs.pushBranch }}
+    debug: ${{ inputs.debug }}
