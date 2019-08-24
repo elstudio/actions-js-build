@@ -46,6 +46,7 @@ EOF
   
   # Push to the current branch if PUSH_BRANCH hasn't been overriden
   : ${PUSH_BRANCH:=`echo "$GITHUB_REF" | awk -F / '{ print $3 }' `}
+  echo "PUSH_BRANCH: $PUSH_BRANCH"
 }
 
 

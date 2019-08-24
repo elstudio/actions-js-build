@@ -23,5 +23,5 @@ runs:
   env:
     DEBUG: ${{ inputs.debug }}
     WD_PATH: ${{ inputs.wdPath }}
-    # PUSH_BRANCH: ${{ inputs.pushBranch }}
+    PUSH_BRANCH: ${{ inputs.pushBranch }}
  
