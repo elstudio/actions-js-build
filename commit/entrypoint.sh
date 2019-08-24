@@ -46,9 +46,12 @@ EOF
   
   # Push to the current branch if PUSH_BRANCH hasn't been overriden
   : ${PUSH_BRANCH:=`echo "$GITHUB_REF" | awk -F / '{ print $3 }' `}
-  echo "PUSH_BRANCH: $PUSH_BRANCH"
 }
 
+
+# Push to the current branch if PUSH_BRANCH hasn't been overriden
+: ${PUSH_BRANCH:=`echo "$GITHUB_REF" | awk -F / '{ print $3 }' `}
+echo "PUSH_BRANCH: $PUSH_BRANCH"
 
 # This section only runs if there have been file changes
 echo "Checking for uncommitted changes in the git working tree."
