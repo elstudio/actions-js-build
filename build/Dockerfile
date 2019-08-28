@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:10-alpine
 
 LABEL version="1.0.0"
 LABEL repository="https://github.com/elstudio/actions-js-build"
