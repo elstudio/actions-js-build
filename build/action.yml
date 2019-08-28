@@ -9,7 +9,7 @@ inputs:
     description: 'Working directory path'
     required: false
     default: ''
-   debug:
+  debug:
     description: 'Print script debugging info'
     required: false
     default: 'false'
