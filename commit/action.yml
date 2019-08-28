@@ -1,0 +1,27 @@
+name: 'GitHub Action for git commit'
+description: 'Commits any changed files and pushes the result back to origin branch.'
+author: 'elstudio'
+branding:
+  icon: 'git-commit'
+  color: 'green'
+inputs: 
+  wdPath:
+    description: 'Working directory path'
+    required: false
+    default: ''
+  pushBranch:
+    description: 'Override branch to push to'
+    requried: false
+  debug:
+    description: 'Print script debugging info'
+    required: false
+    default: 'false'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  entrypoint: 'entrypoint.sh'
+  env:
+    DEBUG: ${{ inputs.debug }}
+    WD_PATH: ${{ inputs.wdPath }}
+    PUSH_BRANCH: ${{ inputs.pushBranch }}
+ 

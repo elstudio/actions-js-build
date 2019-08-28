@@ -1,8 +1,17 @@
 #!/bin/sh
 
-set -e
+if [ "$DEBUG" == "false" ]
+then
+  # Carry on, but do quit on errors
+  set -e
+else
+  # Verbose debugging
+  set -exuo pipefail
+  export LOG_LEVEL=debug
+fi
 
-if [ -n "$WD_PATH" ]
+
+if [ ! -z "$WD_PATH" ]
 then
   echo "Changing dir to $WD_PATH"
   cd $WD_PATH

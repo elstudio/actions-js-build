@@ -1,0 +1,22 @@
+name: 'GitHub Action to execute javascript build tools'
+description: 'Executes npm install, followed by gulp or grunt (whichever has a build file).'
+author: 'elstudio'
+branding:
+  icon: 'truck'
+  color: 'purple'
+inputs: 
+  wdPath:
+    description: 'Working directory path'
+    required: false
+    default: ''
+  debug:
+    description: 'Print script debugging info'
+    required: false
+    default: 'false'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  entrypoint: 'entrypoint.sh'
+  env:
+    DEBUG: ${{ inputs.debug }}
+    WD_PATH: ${{ inputs.wdPath }} 

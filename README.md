@@ -14,29 +14,31 @@ This repository contains two actions that may be used independently -- typically
 
 An example workflow to run `grunt default` task to build, test, then commit and push any changes back to the GitHub origin repository:
 
-```hcl
-workflow "Grunt compile" {
-  on = "push"
-  resolves = ["Commit and Push"]
-}
+```yaml
+name: Grunt build and commit updated stylesheets
 
-action "Build" {
-  uses = "elstudio/actions-js-build/build@master"
-  env = {
-    WD_PATH = "./web/themes/nw8"
-  }
-  args = "default"
-}
+on: [push]
 
-action "Commit and Push" {
-  uses = "elstudio/actions-js-build/commit@master"
-  needs = ["Build"]
-  secrets = ["GITHUB_TOKEN"]
-  env = {
-    PUSH_BRANCH = "staging"
-  }
-}
+jobs:
+  grunt-build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Compile with Grunt
+      uses: elstudio/actions-js-build/build@v2
+      env:
+        WD_PATH: './web/themes/nw8'
+
+    - name: Commit changes
+      uses: elstudio/actions-js-build/commit@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PUSH_BRANCH: 'staging'
 ```
+
 
 ### Secrets
 

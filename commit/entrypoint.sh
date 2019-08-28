@@ -10,10 +10,18 @@
 ## - $WD_PATH: Working directory to CD into before checking for changes
 ## - $PUSH_BRANCH: Remote branch to push changes to
 
-set -e
+if [ "$DEBUG" == "false" ]
+then
+  # Carry on, but do quit on errors
+  set -e
+else
+  # Verbose debugging
+  set -exuo pipefail
+  export LOG_LEVEL=debug
+fi
 
 # If WD_PATH is defined, then cd to it
-if [ -n "$WD_PATH" ]
+if [ ! -z "$WD_PATH" ]
 then
   echo "Changing dir to $WD_PATH"
   cd $WD_PATH
@@ -39,7 +47,6 @@ EOF
   # Push to the current branch if PUSH_BRANCH hasn't been overriden
   : ${PUSH_BRANCH:=`echo "$GITHUB_REF" | awk -F / '{ print $3 }' `}
 }
-
 
 # This section only runs if there have been file changes
 echo "Checking for uncommitted changes in the git working tree."
