@@ -6,13 +6,14 @@ This Action for git commits any changed files and pushes those changes back to t
 
 An example workflow to commit and push any changes back to the GitHub origin repository:
 
+
 ```yaml
-name: Enforce repository settings
+name: Grunt build and commit updated stylesheets
 
 on: [push]
 
 jobs:
-  probot-settings:
+  grunt-build:
 
     runs-on: ubuntu-latest
 
@@ -22,7 +23,7 @@ jobs:
     - name: Compile with Grunt
       uses: elstudio/actions-js-build/build@v2
       env:
-      	WD_PATH = './web/themes/nw8'
+        WD_PATH: './web/themes/nw8'
 
     - name: Commit changes
       uses: elstudio/actions-js-build/commit@v2
