@@ -6,20 +6,29 @@ This Action for git commits any changed files and pushes those changes back to t
 
 An example workflow to commit and push any changes back to the GitHub origin repository:
 
-```hcl
-workflow "Commit and Push" {
-  on = "push"
-  resolves = ["Commit and Push"]
-}
+```yaml
+name: Enforce repository settings
 
-action "Commit and Push" {
-  uses = "elstudio/actions-js-build/commit@master"
-  secrets = ["GITHUB_TOKEN"]
-  env = {
-    WD_PATH = "./web/themes/nw8"
-    PUSH_BRANCH = "staging"
-  }
-}
+on: [push]
+
+jobs:
+  probot-settings:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Compile with Grunt
+      uses: elstudio/actions-js-build/build@v2
+      env:
+      	WD_PATH = './web/themes/nw8'
+
+    - name: Commit changes
+      uses: elstudio/actions-js-build/commit@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PUSH_BRANCH: 'staging'
 ```
 
 ### Secrets

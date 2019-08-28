@@ -12,30 +12,32 @@ This Action for [npm](https://www.npmjs.com/) installs any required npm packages
 
 An example workflow to run the `grunt default` task to build, test. The second action commits and pushes any changes back to the GitHub origin repository:
 
-```hcl
-workflow "Grunt compile" {
-  on = "push"
-  resolves = ["Commit and Push"]
-}
 
-action "Build" {
-  uses = "elstudio/actions-js-build/build@master"
-  env = {
-    WD_PATH = "./web/themes/nw8"
-  }
-  args = "default"
-}
+```yaml
+name: Enforce repository settings
 
-action "Commit and Push" {
-  uses = "elstudio/actions-js-build/commit@master"
-  needs = ["Build"]
-  secrets = ["GITHUB_TOKEN"]
-}
+on: [push]
+
+jobs:
+  probot-settings:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Compile with Grunt
+      uses: elstudio/actions-js-build/build@v2
+      env:
+        WD_PATH = './web/themes/nw8'
+
+    - name: Commit changes
+      uses: elstudio/actions-js-build/commit@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PUSH_BRANCH: 'staging'
 ```
 
-### Secrets
-
-* `GITHUB_TOKEN` - **Required**. The token to use for authentication with GitHub to commit and push changes back to the origin repository. ([more info](https://developer.github.com/actions/creating-github-actions/accessing-the-runtime-environment/#environment-variables))
 
 ### Environment variables
 
