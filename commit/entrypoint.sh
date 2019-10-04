@@ -18,6 +18,7 @@ else
   # Verbose debugging
   set -exuo pipefail
   export LOG_LEVEL=debug
+  export ACTIONS_STEP_DEBUG=true
 fi
 
 # If WD_PATH is defined, then cd to it
