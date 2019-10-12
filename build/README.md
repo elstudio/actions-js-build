@@ -28,20 +28,21 @@ jobs:
 
     - name: Compile with Grunt
       uses: elstudio/actions-js-build/build@v2
-      env:
-        WD_PATH: './web/themes/nw8'
+      with:
+        wdPath: './web/themes/nw8'
 
     - name: Commit changes
       uses: elstudio/actions-js-build/commit@v2
+      with:
+        pushBranch: staging 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PUSH_BRANCH: 'staging'
 ```
 
 
-### Environment variables
+### Inputs
 
-* `WD_PATH` - **Optional**. To specify a directory other than the repository root where NPM's Package.json and either gulpfile.js or Gruntfile.js may be found.
+* `wdPath` - **Optional**. To specify a directory other than the repository root where NPM's Package.json and either gulpfile.js or Gruntfile.js may be found.
 
 
 ## License

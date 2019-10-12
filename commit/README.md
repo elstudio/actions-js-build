@@ -22,24 +22,27 @@ jobs:
 
     - name: Compile with Grunt
       uses: elstudio/actions-js-build/build@v2
-      env:
-        WD_PATH: './web/themes/nw8'
+      with:
+        wdPath: './web/themes/nw8'
 
     - name: Commit changes
       uses: elstudio/actions-js-build/commit@v2
+      with:
+        pushBranch: staging
+        commitMessage: Regenerate css 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PUSH_BRANCH: 'staging'
 ```
 
 ### Secrets
 
 * `GITHUB_TOKEN` - **Required**. The token to use for authentication with GitHub to commit and push changes back to the origin repository. ([more info](https://developer.github.com/actions/creating-github-actions/accessing-the-runtime-environment/#environment-variables))
 
-### Environment variables
+### Inputs 
 
-* `WD_PATH` - **Optional**. To specify a directory other than the repository root to check for changed files.
-* `PUSH_BRANCH` - **Optional**. The branch that changes will be pushed to. Default is the currently checked out branch.
+* `commitMessage` - **Optional**. Git Commit Message. Defaults to *Regenerate build artifacts.`
+* `wdPath` - **Optional**. To specify a directory other than the repository root to check for changed files.
+* `pushBranch` - **Optional**. The branch that changes will be pushed to. Default is the currently checked out branch.
 
 ## License
 

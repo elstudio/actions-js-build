@@ -16,6 +16,10 @@ inputs:
     description: 'Print script debugging info'
     required: false
     default: 'false'
+  commitMessage: 
+    description: 'Message to log for this commit'
+    required: false
+    default: 'Regenerate build artifacts.'
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -23,4 +27,5 @@ runs:
     DEBUG: ${{ inputs.debug }}
     WD_PATH: ${{ inputs.wdPath }}
     PUSH_BRANCH: ${{ inputs.pushBranch }}
+    COMMIT_MESSAGE: ${{ inputs.commitMessage }}
  
