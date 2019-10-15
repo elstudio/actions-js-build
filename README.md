@@ -29,14 +29,15 @@ jobs:
 
     - name: Compile with Grunt
       uses: elstudio/actions-js-build/build@v2
-      env:
-        WD_PATH: './web/themes/nw8'
+      with:
+        wdPath: './web/themes/nw8'
 
     - name: Commit changes
       uses: elstudio/actions-js-build/commit@v2
+      with:
+        pushBranch: staging
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PUSH_BRANCH: 'staging'
 ```
 
 
