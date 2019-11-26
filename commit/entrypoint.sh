@@ -46,7 +46,7 @@ EOF
   git config user.name "$GITHUB_ACTOR"
   
   # Push to the current branch if PUSH_BRANCH hasn't been overriden
-  : ${PUSH_BRANCH:=`echo "$GITHUB_REF" | awk -F / '{ print $3 }' `}
+  : ${PUSH_BRANCH:=$(echo "$GITHUB_REF" | cut -d/ -f3-)}
 }
 
 # This section only runs if there have been file changes
