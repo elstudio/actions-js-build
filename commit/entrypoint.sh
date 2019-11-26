@@ -56,7 +56,7 @@ then
   git_setup
   git checkout $PUSH_BRANCH
   git add .
-  git commit -m $COMMIT_MESSAGE
+  git commit -m "$COMMIT_MESSAGE"
   git push --set-upstream origin $PUSH_BRANCH
 else 
   echo "Working tree clean. Nothing to commit."
