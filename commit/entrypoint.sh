@@ -25,12 +25,12 @@ fi
 if [ ! -z "$WD_PATH" ]
 then
   echo "Changing dir to $WD_PATH"
-  cd $WD_PATH
+  cd "$WD_PATH"
 fi
 
 # Set up .netrc file with GitHub credentials
 git_setup ( ) {
-  cat <<- EOF > $HOME/.netrc
+  cat <<- EOF > "$HOME/.netrc"
 		machine github.com
 		login $GITHUB_ACTOR
 		password $GITHUB_TOKEN
@@ -39,14 +39,14 @@ git_setup ( ) {
 		login $GITHUB_ACTOR
 		password $GITHUB_TOKEN
 EOF
-  chmod 600 $HOME/.netrc
+  chmod 600 "$HOME/.netrc"
 
   # Git requires our "name" and email address -- use GitHub handle
   git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
   git config user.name "$GITHUB_ACTOR"
 
   # Push to the current branch if PUSH_BRANCH hasn't been overriden
-  : ${PUSH_BRANCH:=${GITHUB_REF/refs\/heads\//}}
+  : ${PUSH_BRANCH:="${GITHUB_REF/refs\/heads\//}"}
 }
 
 # This section only runs if there have been file changes
@@ -54,10 +54,10 @@ echo "Checking for uncommitted changes in the git working tree."
 if ! git diff --quiet
 then
   git_setup
-  git checkout $PUSH_BRANCH
+  git checkout "$PUSH_BRANCH"
   git add .
-  git commit -m $COMMIT_MESSAGE
-  git push --set-upstream origin $PUSH_BRANCH
+  git commit -m "$COMMIT_MESSAGE"
+  git push --set-upstream origin "$PUSH_BRANCH"
 else
   echo "Working tree clean. Nothing to commit."
 fi
