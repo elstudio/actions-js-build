@@ -1,9 +1,9 @@
 #!/bin/sh
-## This GitHub Action for git commits any changed files and pushes 
+## This GitHub Action for git commits any changed files and pushes
 ## those changes back to the origin repository.
 ##
 ## Required environment variable:
-## - $GITHUB_TOKEN: The token to use for authentication with GitHub 
+## - $GITHUB_TOKEN: The token to use for authentication with GitHub
 ## to commit and push changes back to the origin repository.
 ##
 ## Optional environment variables:
@@ -44,20 +44,20 @@ EOF
   # Git requires our "name" and email address -- use GitHub handle
   git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
   git config user.name "$GITHUB_ACTOR"
-  
+
   # Push to the current branch if PUSH_BRANCH hasn't been overriden
-  : ${PUSH_BRANCH:=`echo "$GITHUB_REF" | awk -F / '{ print $3 }' `}
+  : ${PUSH_BRANCH:=${GITHUB_REF/refs\/heads\//}}
 }
 
 # This section only runs if there have been file changes
 echo "Checking for uncommitted changes in the git working tree."
 if ! git diff --quiet
-then 
+then
   git_setup
   git checkout $PUSH_BRANCH
   git add .
   git commit -m $COMMIT_MESSAGE
   git push --set-upstream origin $PUSH_BRANCH
-else 
+else
   echo "Working tree clean. Nothing to commit."
 fi
