@@ -4,7 +4,7 @@ author: 'elstudio'
 branding:
   icon: 'git-commit'
   color: 'green'
-inputs: 
+inputs:
   wdPath:
     description: 'Working directory path'
     required: false
@@ -16,10 +16,14 @@ inputs:
     description: 'Print script debugging info'
     required: false
     default: 'false'
-  commitMessage: 
+  commitMessage:
     description: 'Message to log for this commit'
     required: false
     default: 'Regenerate build artifacts.'
+  commitPaths:
+    description: 'Which paths to commit'
+    required: false
+    default: '.'
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -28,4 +32,4 @@ runs:
     WD_PATH: ${{ inputs.wdPath }}
     PUSH_BRANCH: ${{ inputs.pushBranch }}
     COMMIT_MESSAGE: ${{ inputs.commitMessage }}
- 
+    COMMIT_PATHS: ${{ inputs.commitPaths }}

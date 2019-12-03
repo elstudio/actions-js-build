@@ -55,7 +55,7 @@ if ! git diff --quiet
 then
   git_setup
   git checkout "$PUSH_BRANCH"
-  git add .
+  git add $COMMIT_PATHS
   git commit -m "$COMMIT_MESSAGE"
   git push --set-upstream origin "$PUSH_BRANCH"
 else
