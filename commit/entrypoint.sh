@@ -55,6 +55,7 @@ if expr $(git status --porcelain | wc -l) > 0
 then 
   git_setup
   # git checkout $PUSH_BRANCH
+  echo $PUSH_BRANCH
   git add .
   git commit -m "$COMMIT_MESSAGE"
   # git push --set-upstream origin $PUSH_BRANCH
