@@ -25,7 +25,7 @@ fi
 if [ ! -z "$WD_PATH" ]
 then
   echo "Changing dir to $WD_PATH"
-  cd $WD_PATH
+  cd "$WD_PATH"
 fi
 
 # Set up .netrc file with GitHub credentials
@@ -46,7 +46,7 @@ EOF
   git config user.name "$GITHUB_ACTOR"
   
   # Push to the current branch if PUSH_BRANCH hasn't been overriden
-  : ${PUSH_BRANCH:=`echo "$GITHUB_REF" | awk -F / '{ print $3 }' `}
+  : ${PUSH_BRANCH:=`echo "$GITHUB_REF" | awk -F / '{ print $NF }' `}
 }
 
 # This section only runs if there have been file changes
@@ -56,7 +56,7 @@ then
   git_setup
   # git checkout $PUSH_BRANCH
   git add .
-  git commit -m $COMMIT_MESSAGE
+  git commit -m "$COMMIT_MESSAGE"
   # git push --set-upstream origin $PUSH_BRANCH
   git push
 else 
