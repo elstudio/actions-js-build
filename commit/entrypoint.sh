@@ -54,10 +54,11 @@ echo "Checking for uncommitted changes in the git working tree."
 if ! git diff --quiet
 then 
   git_setup
-  git checkout $PUSH_BRANCH
+  # git checkout $PUSH_BRANCH
   git add .
   git commit -m $COMMIT_MESSAGE
-  git push --set-upstream origin $PUSH_BRANCH
+  # git push --set-upstream origin $PUSH_BRANCH
+  git push
 else 
   echo "Working tree clean. Nothing to commit."
 fi
