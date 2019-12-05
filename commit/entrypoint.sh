@@ -46,19 +46,18 @@ EOF
   git config user.name "$GITHUB_ACTOR"
   
   # Push to the current branch if PUSH_BRANCH hasn't been overriden
+  # Actions/checkout@v2-beta and later make this unnecessary
   : ${PUSH_BRANCH:=`echo "$GITHUB_REF" | awk -F / '{ print $NF }' `}
+  echo "PUSH_BRANCH=$PUSH_BRANCH"
 }
 
 # This section only runs if there have been file changes
 echo "Checking for uncommitted changes in the git working tree."
-if expr $(git status --porcelain | wc -l) > 0
+if expr $(git status --porcelain | wc -l) \> 0
 then 
   git_setup
-  # git checkout $PUSH_BRANCH
-  echo $PUSH_BRANCH
   git add .
   git commit -m "$COMMIT_MESSAGE"
-  # git push --set-upstream origin $PUSH_BRANCH
   git push
 else 
   echo "Working tree clean. Nothing to commit."
