@@ -51,7 +51,7 @@ EOF
 
 # This section only runs if there have been file changes
 echo "Checking for uncommitted changes in the git working tree."
-if ! git diff --quiet
+if expr $(git status --porcelain | wc -l) > 0
 then 
   git_setup
   # git checkout $PUSH_BRANCH
