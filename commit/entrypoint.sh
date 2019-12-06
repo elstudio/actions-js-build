@@ -56,9 +56,10 @@ echo "Checking for uncommitted changes in the git working tree."
 if expr $(git status --porcelain | wc -l) \> 0
 then 
   git_setup
+  git checkout "$PUSH_BRANCH"
   git add .
   git commit -m "$COMMIT_MESSAGE"
-  git push
+  git push --set-upstream origin "$PUSH_BRANCH"
 else 
   echo "Working tree clean. Nothing to commit."
 fi
