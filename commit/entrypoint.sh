@@ -30,23 +30,12 @@ fi
 
 # Set up .netrc file with GitHub credentials
 git_setup ( ) {
-#   cat <<- EOF > "$HOME/.netrc"
-# 		machine github.com
-# 		login $GITHUB_ACTOR
-# 		password $GITHUB_TOKEN
-
-# 		machine api.github.com
-# 		login $GITHUB_ACTOR
-# 		password $GITHUB_TOKEN
-# EOF
-#   chmod 600 "$HOME/.netrc"
-
+  # Since actions/checkout@v2-beta we no longer need login credentials.
   # Git requires our "name" and email address -- use GitHub handle
   git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
   git config user.name "$GITHUB_ACTOR"
   
-  # Push to the current branch if PUSH_BRANCH hasn't been overriden
-  # Actions/checkout@v2-beta and later make this unnecessary
+  # Push to the current branch if PUSH_BRANCH hasn't been specified
   : ${PUSH_BRANCH:=`echo "$GITHUB_REF" | awk -F / '{ print $NF }' `}
   echo "PUSH_BRANCH=$PUSH_BRANCH"
 }
@@ -56,11 +45,12 @@ echo "Checking for uncommitted changes in the git working tree."
 if expr $(git status --porcelain | wc -l) \> 0
 then 
   git_setup
-  # git checkout "$PUSH_BRANCH"
+  # Actions/checkout@v2-beta and later make this unnecessary
+  git checkout "$PUSH_BRANCH"
   git add .
   git commit -m "$COMMIT_MESSAGE"
-  # git push --set-upstream origin "$PUSH_BRANCH"
-  git push
+  # Actions/checkout@v2-beta and later mean a straight git push should work
+  git push --set-upstream origin "$PUSH_BRANCH"
 else 
   echo "Working tree clean. Nothing to commit."
 fi
