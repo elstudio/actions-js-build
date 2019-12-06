@@ -2,6 +2,8 @@
 
 This Action for git commits any changed files and pushes those changes back to the origin repository.
 
+**V3 of this action (elstudio/actions-js-build/commit@v3) requires actions/checkout@v2-beta or later.**
+
 ## Usage
 
 An example workflow to commit and push any changes back to the GitHub origin repository:
