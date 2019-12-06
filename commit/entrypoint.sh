@@ -30,16 +30,16 @@ fi
 
 # Set up .netrc file with GitHub credentials
 git_setup ( ) {
-#   cat <<- EOF > "$HOME/.netrc"
-# 		machine github.com
-# 		login $GITHUB_ACTOR
-# 		password $GITHUB_TOKEN
+  cat <<- EOF > "$HOME/.netrc"
+		machine github.com
+		login $GITHUB_ACTOR
+		password $GITHUB_TOKEN
 
-# 		machine api.github.com
-# 		login $GITHUB_ACTOR
-# 		password $GITHUB_TOKEN
-# EOF
-#   chmod 600 "$HOME/.netrc"
+		machine api.github.com
+		login $GITHUB_ACTOR
+		password $GITHUB_TOKEN
+EOF
+  chmod 600 "$HOME/.netrc"
 
   # Git requires our "name" and email address -- use GitHub handle
   git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
@@ -47,8 +47,8 @@ git_setup ( ) {
   
   # Push to the current branch if PUSH_BRANCH hasn't been overriden
   # Actions/checkout@v2-beta and later make this unnecessary
-  # : ${PUSH_BRANCH:=`echo "$GITHUB_REF" | awk -F / '{ print $NF }' `}
-  # echo "PUSH_BRANCH=$PUSH_BRANCH"
+  : ${PUSH_BRANCH:=`echo "$GITHUB_REF" | awk -F / '{ print $NF }' `}
+  echo "PUSH_BRANCH=$PUSH_BRANCH"
 }
 
 # This section only runs if there have been file changes
