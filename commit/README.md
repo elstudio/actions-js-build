@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2-beta
 
     - name: Compile with Grunt
       uses: elstudio/actions-js-build/build@v2
@@ -40,7 +40,7 @@ jobs:
 
 ### Inputs 
 
-* `commitMessage` - **Optional**. Git Commit Message. Defaults to *Regenerate build artifacts.`
+* `commitMessage` - **Optional**. Git Commit Message. Defaults to "Regenerate build artifacts."
 * `wdPath` - **Optional**. To specify a directory other than the repository root to check for changed files.
 * `pushBranch` - **Optional**. The branch that changes will be pushed to. Default is the currently checked out branch.
 
