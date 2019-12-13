@@ -23,5 +23,4 @@ runs:
   env:
     DEBUG: ${{ inputs.debug }}
     WD_PATH: ${{ inputs.wdPath }}
-    COMMIT_MESSAGE: ${{ inputs.commitMessage }}
- 
+    COMMIT_MESSAGE: ${{ inputs.commitMessage }} 
