@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
 
     - name: Compile with Grunt
       uses: elstudio/actions-js-build/build@v2
@@ -32,11 +32,9 @@ jobs:
         wdPath: './web/themes/nw8'
 
     - name: Commit changes
-      uses: elstudio/actions-js-build/commit@v2
+      uses: elstudio/actions-js-build/commit@v3
       with:
-        pushBranch: staging 
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        commitMessage: Regenerate css 
 ```
 
 
