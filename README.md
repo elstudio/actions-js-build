@@ -7,7 +7,7 @@ Perfect for Grunt or Gulp tasks that do CSS (or SASS/LESS) compilation or JS tra
 This repository contains two actions that may be used independently -- typically one after another:
 
 - **build** (elstudio/actions-js-build/build@v2): Looks for a gulpfile.js or Gruntfile.js in the working directory, then installs any required npm packages and runs the appropriate build tool. If it finds neither gulp or grunt, the script runs npm. Set the workflow `args` arguments to run the tasks of your choice.
-- **commit** (elstudio/actions-js-build/commit@v2): Commits any file changes, and pushes them back to the current branch of the origin repository on GitHub.
+- **commit** (elstudio/actions-js-build/commit@v3): Commits any file changes, and pushes them back to the current branch of the origin repository on GitHub.
 
 
 ## Usage
