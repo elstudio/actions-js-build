@@ -33,23 +33,16 @@ jobs:
         wdPath: './web/themes/nw8'
 
     - name: Commit changes
-      uses: elstudio/actions-js-build/commit@v2
+      uses: elstudio/actions-js-build/commit@v3
       with:
-        pushBranch: staging
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        commitMessage: Regenerate css 
 ```
 
 
-### Secrets
 
-* `GITHUB_TOKEN` - **Required**. The token to use for authentication with GitHub to commit and push changes back to the origin repository. ([more info](https://developer.github.com/actions/creating-github-actions/accessing-the-runtime-environment/#environment-variables))
+### Inputs
 
-
-### Environment variables
-
-* `WD_PATH` - **Optional**. To specify a directory other than the repository root where NPM's Package.json and either gulpfile.js or Gruntfile.js may be found.
-* `PUSH_BRANCH` - **Optional**. The branch that changes will be pushed to. Default is the currently checked out branch.
+* `wdPath` - **Optional**. To specify a directory other than the repository root where NPM's Package.json and either gulpfile.js or Gruntfile.js may be found.
 
 
 ## License
