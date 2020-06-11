@@ -19,7 +19,7 @@ then
 fi
 echo $PWD 
 echo "Installing NPM dependencies"
-npm install
+npm ci
 
 
 
