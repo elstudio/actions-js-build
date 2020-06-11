@@ -13,5 +13,5 @@ COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
 
 
 COPY "entrypoint.sh" "/entrypoint.sh"
-ENTRYPOINT ["/bin/bash/", "/entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
 CMD ["default"]
