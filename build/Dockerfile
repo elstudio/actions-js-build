@@ -1,4 +1,4 @@
-FROM node:12.18-alpine
+FROM node:12.11.1
 
 LABEL version="1.0.0"
 LABEL repository="https://github.com/elstudio/actions-js-build"
@@ -11,8 +11,6 @@ LABEL com.github.actions.icon="truck"
 LABEL com.github.actions.color="purple"
 COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
 
-
-RUN apk --update --no-cache add git
 
 COPY "entrypoint.sh" "/entrypoint.sh"
 ENTRYPOINT ["/entrypoint.sh"]
