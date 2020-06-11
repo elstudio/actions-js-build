@@ -11,6 +11,9 @@ LABEL com.github.actions.icon="truck"
 LABEL com.github.actions.color="purple"
 COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
 
+
+RUN apk --update --no-cache add git
+
 COPY "entrypoint.sh" "/entrypoint.sh"
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["default"]
