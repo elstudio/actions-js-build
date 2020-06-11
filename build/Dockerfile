@@ -1,4 +1,4 @@
-FROM node:12.11.1
+FROM node:14.4.0-stretch
 
 LABEL version="1.0.0"
 LABEL repository="https://github.com/elstudio/actions-js-build"
