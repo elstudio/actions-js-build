@@ -17,7 +17,7 @@ then
   echo "Changing dir to $WD_PATH"
   cd $WD_PATH
 fi
-
+echo $PWD 
 echo "Installing NPM dependencies"
 npm install
 
