@@ -21,6 +21,7 @@ runs:
   using: 'composite'
   steps:
   - run: ${{ github.action_path }}//entrypoint.sh
+    shell: bash
     env:
       DEBUG: ${{ inputs.debug }}
       WD_PATH: ${{ inputs.wdPath }}
