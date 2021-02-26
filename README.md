@@ -28,12 +28,12 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Compile with Grunt
-      uses: elstudio/actions-js-build/build@v2
+      uses: elstudio/actions-js-build/build@v4-beta
       with:
         wdPath: './web/themes/nw8'
 
     - name: Commit changes
-      uses: elstudio/actions-js-build/commit@v3
+      uses: elstudio/actions-js-build/commit@v4-beta
       with:
         commitMessage: Regenerate css 
 ```
@@ -43,10 +43,3 @@ jobs:
 ### Inputs
 
 * `wdPath` - **Optional**. To specify a directory other than the repository root where NPM's Package.json and either gulpfile.js or Gruntfile.js may be found.
-
-
-## License
-
-The Dockerfile and associated scripts and documentation in this project are released under the [MIT License](LICENSE).
-
-Container images built with this project include third party materials. See [THIRD_PARTY_NOTICE.md](THIRD_PARTY_NOTICE.md) for details.

@@ -14,8 +14,10 @@ inputs:
     required: false
     default: 'false'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  env:
-    DEBUG: ${{ inputs.debug }}
-    WD_PATH: ${{ inputs.wdPath }} 
+  using: 'composite'
+  steps:
+  - run: ${{ github.action_path }}/entrypoint.sh
+    shell: bash
+    env:
+      DEBUG: ${{ inputs.debug }}
+      WD_PATH: ${{ inputs.wdPath }} 

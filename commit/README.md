@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Compile with Grunt
-      uses: elstudio/actions-js-build/build@v2
+      uses: elstudio/actions-js-build/build@4-beta
       with:
         wdPath: './web/themes/nw8'
 
