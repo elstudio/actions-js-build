@@ -2,7 +2,7 @@
 
 This Action for git commits any changed files and pushes those changes back to the origin repository.
 
-**V3 or later of this action (elstudio/actions-js-build/commit@v3) requires actions/checkout@v2 or later.**
+**V3 or later of this action (elstudio/actions-js-build/commit@v4) requires actions/checkout@v2 or later.**
 
 ## Usage
 
@@ -21,14 +21,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 12
 
     - name: Compile with Grunt
-      uses: elstudio/actions-js-build/build@4-beta
+      uses: elstudio/actions-js-build/build@4
       with:
         wdPath: './web/themes/nw8'
 
     - name: Commit changes
-      uses: elstudio/actions-js-build/commit@v4-beta
+      uses: elstudio/actions-js-build/commit@v4
       with:
         commitMessage: Regenerate css 
 ```
