@@ -23,7 +23,7 @@ npm install
 
 # First try Gulp, then try Grunt
 # Gulpfile.js can be a file or a directory:
-if [ -e "gulpfile.js" ]
+if [ -e "gulpfile.js" -o -f "gulpfile.babel.js" ]
 then 
   npm install -g gulp-cli
   echo "Running Gulp with args"
