@@ -18,9 +18,11 @@ inputs:
     required: false
     default: 'Regenerate build artifacts.'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  env:
-    DEBUG: ${{ inputs.debug }}
-    WD_PATH: ${{ inputs.wdPath }}
-    COMMIT_MESSAGE: ${{ inputs.commitMessage }} 
+  using: 'composite'
+  steps:
+  - run: ${{ github.action_path }}/entrypoint.sh
+    shell: bash
+    env:
+      DEBUG: ${{ inputs.debug }}git
+      WD_PATH: ${{ inputs.wdPath }}
+      COMMIT_MESSAGE: ${{ inputs.commitMessage }} 

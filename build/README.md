@@ -4,7 +4,7 @@ Run JS build tasks with Gulp, Grunt or NPM.
 
 Perfect for Grunt tasks that do CSS (or SASS/LESS) compilation or JavaScript transpilation.  
 
-- **build** (elstudio/actions-js-build/build@master): Looks for a gulpfile.js or Gruntfile.js in the working directory, then installs any required npm packages and runs the build tool. If it finds neither gulp or grunt, the script runs npm. Set the workflow `args` arguments to run the tasks of your choice.
+- **build** (elstudio/actions-js-build/build@v4): Looks for a gulpfile.js or Gruntfile.js in the working directory, then installs any required npm packages and runs the build tool. If it finds neither gulp or grunt, the script runs npm. Set the workflow `args` arguments to run the tasks of your choice.
 
 This Action for [npm](https://www.npmjs.com/) installs any required npm packages, then installs and runs any installed JavaScript build tools -- currently either Gulp or Grunt.
 
@@ -25,14 +25,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 12
     - name: Compile with Grunt
-      uses: elstudio/actions-js-build/build@v2
+      uses: elstudio/actions-js-build/build@v4
       with:
         wdPath: './web/themes/nw8'
 
     - name: Commit changes
-      uses: elstudio/actions-js-build/commit@v3
+      uses: elstudio/actions-js-build/commit@v4
       with:
         commitMessage: Regenerate css 
 ```
@@ -41,10 +43,3 @@ jobs:
 ### Inputs
 
 * `wdPath` - **Optional**. To specify a directory other than the repository root where NPM's Package.json and either gulpfile.js or Gruntfile.js may be found.
-
-
-## License
-
-The Dockerfile and associated scripts and documentation in this project are released under the [MIT License](LICENSE).
-
-Container images built with this project include third party materials. See [THIRD_PARTY_NOTICE.md](THIRD_PARTY_NOTICE.md) for details.

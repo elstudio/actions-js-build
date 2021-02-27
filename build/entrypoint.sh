@@ -6,7 +6,7 @@ then
   set -e
 else
   # Verbose debugging
-  set -exuo pipefail
+  # set -exuo pipefail
   export LOG_LEVEL=debug
   export ACTIONS_STEP_DEBUG=true
 fi
