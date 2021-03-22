@@ -18,8 +18,11 @@ then
   cd $WD_PATH
 fi
 
-echo "Installing NPM dependencies"
-npm install
+if [ -z "$SKIP_INSTALL" ]
+then
+  echo "Installing NPM dependencies"
+  npm install
+fi
 
 # First try Gulp, then try Grunt
 # Gulpfile.js can be a file or a directory:
